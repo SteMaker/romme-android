@@ -1,0 +1,25 @@
+# Build output
+build/
+app/build/
+*.apk
+*.aab
+
+# Gradle
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Local config (machine-specific SDK paths)
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Crash dumps
+*.hprof
+
+# Keystore (never commit)
+*.jks
+*.keystore

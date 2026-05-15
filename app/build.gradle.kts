@@ -15,16 +15,16 @@ android {
         versionCode = 1
         versionName = "0.1.0"
 
-        buildConfigField("String", "SERVER_URL", "\"https://fam-macher.de\"")
+        buildConfigField("String", "SERVER_URL", "\"https://example.com\"")
         buildConfigField("String", "SOCKET_PATH", "\"/romme/socket.io\"")
-        buildConfigField("String", "NEXTCLOUD_URL", "\"https://fam-macher.de\"")
+        buildConfigField("String", "NEXTCLOUD_URL", "\"https://example.com\"")
         buildConfigField("String", "NEXTCLOUD_CLIENT_ID", "\"your-client-id\"")
         manifestPlaceholders["appAuthRedirectScheme"] = "com.romme"
     }
 
     buildTypes {
         debug {
-            buildConfigField("String", "SERVER_URL", "\"http://192.168.4.100:3001\"")
+            buildConfigField("String", "SERVER_URL", "\"http://example.com:3001\"")
         }
     }
 

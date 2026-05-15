@@ -18,8 +18,6 @@ android {
         buildConfigField("String", "SERVER_URL", "\"https://example.com\"")
         buildConfigField("String", "SOCKET_PATH", "\"/romme/socket.io\"")
         buildConfigField("String", "NEXTCLOUD_URL", "\"https://example.com\"")
-        buildConfigField("String", "NEXTCLOUD_CLIENT_ID", "\"your-client-id\"")
-        manifestPlaceholders["appAuthRedirectScheme"] = "com.romme"
     }
 
     buildTypes {
@@ -56,8 +54,6 @@ dependencies {
     // Socket.IO Client
     implementation("io.socket:socket.io-client:2.1.1")
 
-    // OAuth2 / Auth
-    implementation("net.openid:appauth:0.11.1")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
     // JSON

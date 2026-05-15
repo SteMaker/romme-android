@@ -1,7 +1,5 @@
 package com.romme.ui.screens
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -39,19 +37,8 @@ fun LoginScreen(
     var nextcloudUrl by remember {
         mutableStateOf(savedSettings.nextcloudUrl.ifEmpty { BuildConfig.NEXTCLOUD_URL })
     }
-    var clientId by remember { mutableStateOf(savedSettings.clientId) }
-    var clientSecret by remember { mutableStateOf(savedSettings.clientSecret) }
-
-    val oauthLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        val data = result.data
-        if (data != null) {
-            viewModel.handleOAuthResult(data)
-        } else {
-            // User pressed back in browser — stay on login screen
-        }
-    }
+    var nextcloudUsername by remember { mutableStateOf(savedSettings.nextcloudUsername) }
+    var nextcloudPassword by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         viewModel.tryAutoLogin()
@@ -67,8 +54,8 @@ fun LoginScreen(
     val canLogin = !isConnecting &&
             serverUrl.isNotBlank() &&
             nextcloudUrl.isNotBlank() &&
-            clientId.isNotBlank() &&
-            clientSecret.isNotBlank()
+            nextcloudUsername.isNotBlank() &&
+            nextcloudPassword.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -122,9 +109,9 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = clientId,
-            onValueChange = { clientId = it },
-            label = { Text("OAuth2 Client-ID") },
+            value = nextcloudUsername,
+            onValueChange = { nextcloudUsername = it },
+            label = { Text("Nextcloud-Benutzername") },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             modifier = Modifier.fillMaxWidth(),
@@ -134,9 +121,9 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(12.dp))
 
         OutlinedTextField(
-            value = clientSecret,
-            onValueChange = { clientSecret = it },
-            label = { Text("OAuth2 Client-Secret") },
+            value = nextcloudPassword,
+            onValueChange = { nextcloudPassword = it },
+            label = { Text("App-Passwort") },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
@@ -183,14 +170,13 @@ fun LoginScreen(
         Button(
             onClick = {
                 viewModel.clearError()
-                val intent = viewModel.createOAuthIntent(
+                viewModel.loginWithAppPassword(
                     serverUrl = serverUrl.trimEnd('/'),
                     socketPath = socketPath.trim(),
                     nextcloudUrl = nextcloudUrl.trimEnd('/'),
-                    clientId = clientId.trim(),
-                    clientSecret = clientSecret.trim(),
+                    username = nextcloudUsername.trim(),
+                    password = nextcloudPassword,
                 )
-                oauthLauncher.launch(intent)
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -202,7 +188,7 @@ fun LoginScreen(
             enabled = canLogin
         ) {
             Text(
-                "Mit Nextcloud anmelden",
+                "Anmelden",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold
             )

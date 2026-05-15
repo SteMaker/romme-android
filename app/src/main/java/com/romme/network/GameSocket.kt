@@ -23,13 +23,13 @@ class GameSocket(private val serverUrl: String, private val socketPath: String =
     private val _connectionState = MutableStateFlow(ConnectionState.DISCONNECTED)
     val connectionState: StateFlow<ConnectionState> = _connectionState
 
-    fun connect(token: String? = null, nextcloudToken: String? = null, displayName: String? = null) {
+    fun connect(token: String? = null, nextcloudUsername: String? = null, nextcloudPassword: String? = null) {
         val options = IO.Options().apply {
             path = socketPath
             auth = mutableMapOf<String, String>().apply {
                 token?.let { put("token", it) }
-                nextcloudToken?.let { put("nextcloudToken", it) }
-                displayName?.let { put("displayName", it) }
+                nextcloudUsername?.let { put("nextcloudUsername", it) }
+                nextcloudPassword?.let { put("nextcloudPassword", it) }
             }
             forceNew = true
             reconnection = true

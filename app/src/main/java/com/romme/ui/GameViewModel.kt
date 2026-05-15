@@ -1,11 +1,9 @@
 package com.romme.ui
 
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.romme.auth.NextcloudAuth
 import com.romme.auth.SettingsStore
 import com.romme.auth.TokenStore
 import com.romme.game.*
@@ -21,8 +19,7 @@ data class LoginSettings(
     val serverUrl: String,
     val socketPath: String,
     val nextcloudUrl: String,
-    val clientId: String,
-    val clientSecret: String,
+    val nextcloudUsername: String,
 )
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
@@ -30,9 +27,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val tokenStore = TokenStore(application)
     private val settingsStore = SettingsStore(application)
     private var gameSocket: GameSocket? = null
-    private var nextcloudAuth: NextcloudAuth? = null
-    private var pendingServerUrl: String = ""
-    private var pendingSocketPath: String = ""
     private var connectingWithJwt: Boolean = false
 
     private val _connectionState = MutableStateFlow(ConnectionState.DISCONNECTED)
@@ -72,8 +66,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         serverUrl = settingsStore.serverUrl,
         socketPath = settingsStore.socketPath,
         nextcloudUrl = settingsStore.nextcloudUrl,
-        clientId = settingsStore.clientId,
-        clientSecret = settingsStore.clientSecret,
+        nextcloudUsername = settingsStore.nextcloudUsername,
     )
 
     fun tryAutoLogin() {
@@ -83,46 +76,36 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         connect(serverUrl = serverUrl, socketPath = socketPath, token = jwt)
     }
 
-    fun createOAuthIntent(
+    fun loginWithAppPassword(
         serverUrl: String,
         socketPath: String,
         nextcloudUrl: String,
-        clientId: String,
-        clientSecret: String,
-    ): Intent {
+        username: String,
+        password: String,
+    ) {
         settingsStore.serverUrl = serverUrl
         settingsStore.socketPath = socketPath
         settingsStore.nextcloudUrl = nextcloudUrl
-        settingsStore.clientId = clientId
-        settingsStore.clientSecret = clientSecret
-        pendingServerUrl = serverUrl
-        pendingSocketPath = socketPath
-        nextcloudAuth?.dispose()
-        nextcloudAuth = NextcloudAuth(getApplication(), nextcloudUrl, clientId, clientSecret)
-        return nextcloudAuth!!.createAuthIntent()
-    }
-
-    fun handleOAuthResult(intent: Intent) {
+        settingsStore.nextcloudUsername = username
         _connectionState.value = ConnectionState.CONNECTING
-        nextcloudAuth?.handleAuthResponse(
-            intent = intent,
-            onSuccess = { accessToken ->
-                connect(serverUrl = pendingServerUrl, socketPath = pendingSocketPath, nextcloudToken = accessToken)
-            },
-            onError = { e ->
-                _connectionState.value = ConnectionState.ERROR
-                _errorMessage.value = "Anmeldung fehlgeschlagen: ${e.message}"
-            },
-            onCanceled = {
-                _connectionState.value = ConnectionState.DISCONNECTED
-            }
+        connect(
+            serverUrl = serverUrl,
+            socketPath = socketPath,
+            nextcloudUsername = username,
+            nextcloudPassword = password,
         )
     }
 
-    private fun connect(serverUrl: String, socketPath: String, token: String? = null, nextcloudToken: String? = null) {
+    private fun connect(
+        serverUrl: String,
+        socketPath: String,
+        token: String? = null,
+        nextcloudUsername: String? = null,
+        nextcloudPassword: String? = null,
+    ) {
         connectingWithJwt = token != null
         gameSocket = GameSocket(serverUrl, socketPath).also { socket ->
-            socket.connect(token = token, nextcloudToken = nextcloudToken)
+            socket.connect(token = token, nextcloudUsername = nextcloudUsername, nextcloudPassword = nextcloudPassword)
 
             socket.connectionState
                 .onEach { state ->
@@ -370,7 +353,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     override fun onCleared() {
-        nextcloudAuth?.dispose()
         gameSocket?.disconnect()
     }
 

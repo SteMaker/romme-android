@@ -19,11 +19,7 @@ class SettingsStore(context: Context) {
         get() = prefs.getString("nextcloud_url", "") ?: ""
         set(value) { prefs.edit().putString("nextcloud_url", value).apply() }
 
-    var clientId: String
-        get() = prefs.getString("client_id", "") ?: ""
-        set(value) { prefs.edit().putString("client_id", value).apply() }
-
-    var clientSecret: String
-        get() = prefs.getString("client_secret", "") ?: ""
-        set(value) { prefs.edit().putString("client_secret", value).apply() }
+    var nextcloudUsername: String
+        get() = prefs.getString("nextcloud_username", "") ?: ""
+        set(value) { prefs.edit().putString("nextcloud_username", value).apply() }
 }

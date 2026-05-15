@@ -333,6 +333,24 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun logout() {
+        tokenStore.clear()
+        gameSocket?.disconnect()
+        gameSocket = null
+        myPlayerId = ""
+        _connectionState.value = ConnectionState.DISCONNECTED
+        _rooms.value = emptyList()
+        _currentRoom.value = null
+        _gameState.value = GameState()
+        _selectedCards.value = emptyList()
+        _errorMessage.value = null
+        _gameAbandoned.value = false
+        pendingActionLines.clear()
+        pendingAffectedMelds.clear()
+        _turnSummary.value = null
+        _changedMeldIds.value = emptySet()
+    }
+
     fun clearError() {
         _errorMessage.value = null
     }

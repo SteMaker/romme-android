@@ -40,7 +40,10 @@ class MainActivity : ComponentActivity() {
                             LobbyScreen(
                                 viewModel = viewModel,
                                 onGameStarted = { navController.navigate("game") },
-                                onBack = { navController.popBackStack() }
+                                onLogout = {
+                                    viewModel.logout()
+                                    navController.popBackStack()
+                                }
                             )
                         }
                         composable("game") {

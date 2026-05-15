@@ -1,5 +1,6 @@
 package com.romme.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,7 +22,7 @@ import com.romme.ui.GameViewModel
 fun LobbyScreen(
     viewModel: GameViewModel,
     onGameStarted: () -> Unit,
-    onBack: () -> Unit
+    onLogout: () -> Unit
 ) {
     val rooms by viewModel.rooms.collectAsState()
     val currentRoom by viewModel.currentRoom.collectAsState()
@@ -29,6 +30,8 @@ fun LobbyScreen(
     val errorMessage by viewModel.errorMessage.collectAsState()
 
     var showCreateDialog by remember { mutableStateOf(false) }
+
+    BackHandler { onLogout() }
 
     // Wenn ein Spiel startet, zum Spielbildschirm wechseln
     LaunchedEffect(gameState.hand, gameState.isFinished) {
@@ -42,8 +45,8 @@ fun LobbyScreen(
             TopAppBar(
                 title = { Text("Lobby") },
                 navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, "Zurück")
+                    IconButton(onClick = onLogout) {
+                        Icon(Icons.Default.ArrowBack, "Abmelden")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(

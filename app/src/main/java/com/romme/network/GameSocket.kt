@@ -66,14 +66,20 @@ class GameSocket(private val serverUrl: String, private val socketPath: String =
 
     fun onTokenReceived(callback: (String) -> Unit) {
         socket?.on("auth:token") { args ->
-            val data = args[0] as JSONObject
+            val data = when (val raw = args[0]) {
+                is JSONObject -> raw
+                else -> JSONObject(raw.toString())
+            }
             callback(data.getString("token"))
         }
     }
 
     fun onUserInfo(callback: (String, String) -> Unit) {
         socket?.on("auth:user") { args ->
-            val data = args[0] as JSONObject
+            val data = when (val raw = args[0]) {
+                is JSONObject -> raw
+                else -> JSONObject(raw.toString())
+            }
             callback(data.getString("id"), data.getString("displayName"))
         }
     }

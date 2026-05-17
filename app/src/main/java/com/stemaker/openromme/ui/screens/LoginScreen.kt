@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.stemaker.openromme.BuildConfig
 import com.stemaker.openromme.network.ConnectionState
+import com.stemaker.openromme.ui.AppLogo
 import com.stemaker.openromme.ui.GameViewModel
 
 @Composable
@@ -66,18 +67,13 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
-        Text(text = "♠ ♥ ♦ ♣", fontSize = 48.sp, textAlign = TextAlign.Center)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = "Open Romme",
-            fontSize = 40.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.secondary
+        AppLogo(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(160.dp)
         )
 
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         OutlinedTextField(
             value = serverUrl,

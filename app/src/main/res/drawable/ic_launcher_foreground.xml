@@ -4,7 +4,44 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Card 3 (back, most rotated) -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:rotation="-10">
+        <path
+            android:fillColor="#FFFFFF"
+            android:fillAlpha="0.20"
+            android:pathData="M32,14 L76,14 Q86,14 86,24 L86,84 Q86,94 76,94 L32,94 Q22,94 22,84 L22,24 Q22,14 32,14 Z"/>
+    </group>
+
+    <!-- Card 2 (middle) -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:rotation="-4">
+        <path
+            android:fillColor="#FFFFFF"
+            android:fillAlpha="0.40"
+            android:pathData="M32,14 L76,14 Q86,14 86,24 L86,84 Q86,94 76,94 L32,94 Q22,94 22,84 L22,24 Q22,14 32,14 Z"/>
+    </group>
+
+    <!-- Card 1 (front) -->
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M54,30 C54,30 38,46 38,58 C38,66.8 45.2,74 54,74 C62.8,74 70,66.8 70,58 C70,46 54,30 54,30 Z"/>
+        android:fillColor="#EEEDFE"
+        android:pathData="M32,14 L76,14 Q86,14 86,24 L86,84 Q86,94 76,94 L32,94 Q22,94 22,84 L22,24 Q22,14 32,14 Z"/>
+
+    <!-- Spade symbol: head + shoulders + stem -->
+    <path
+        android:fillColor="#3C3489"
+        android:pathData="M54,26
+            C54,26 34,40 34,53
+            C34,62 40,67 48,65
+            C45,70 42,75 38,78
+            L70,78
+            C66,75 63,70 60,65
+            C68,67 74,62 74,53
+            C74,40 54,26 54,26 Z"/>
+
 </vector>

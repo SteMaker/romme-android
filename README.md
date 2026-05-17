@@ -71,7 +71,7 @@ Without a self-hosted server, the app cannot connect to anything.
 
 ### Authentication
 
-Authentication is handled via a **Nextcloud account** (username + app password). You therefore also need a Nextcloud instance connected to the romme-server.
+Authentication is handled via a **Nextcloud account** (username + app password). You therefore also need a Nextcloud instance connected to the romme-server. This might be changed in the future.
 
 ### Setup
 
@@ -106,4 +106,4 @@ Open Romme does **not collect, store, or transmit any personal data** to third p
 - No data is shared with advertisers or analytics services.
 - The developer has no access to your connection details or game content.
 
-For privacy-related questions: **maker.stefan@googlemail.com**
+For privacy-related questions: **app.stemaker@gmail.com**

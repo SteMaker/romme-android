@@ -1,0 +1,44 @@
+<svg width="100%" viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Open Romme App Logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">App icon and wordmark for Open Romme, a self-hosted card game app</desc>
+
+  <defs>
+    
+  </defs>
+
+  <!-- Background card stack — subtle shadow cards behind -->
+  <!-- Card 3 (back) -->
+  <rect x="268" y="62" width="144" height="196" rx="14" fill="#3C3489" opacity="0.35" transform="rotate(-10 340 160)" style="fill:rgb(60, 52, 137);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.35;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Card 2 (middle) -->
+  <rect x="268" y="58" width="144" height="196" rx="14" fill="#534AB7" opacity="0.55" transform="rotate(-4 340 160)" style="fill:rgb(83, 74, 183);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.55;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Card 1 (front, main) -->
+  <rect x="268" y="52" width="144" height="196" rx="14" fill="#EEEDFE" stroke="#534AB7" stroke-width="1.5" style="fill:rgb(238, 237, 254);stroke:rgb(83, 74, 183);color:rgb(0, 0, 0);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Card suit symbols on front card -->
+  <!-- Heart top-left -->
+  <text x="285" y="88" font-size="22" fill="#E24B4A" font-family="serif" style="fill:rgb(226, 75, 74);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:serif;font-size:22px;font-weight:400;text-anchor:start;dominant-baseline:auto">♥</text>
+  <!-- Club top-right -->
+  <text x="380" y="88" font-size="22" fill="#2C2C2A" font-family="serif" text-anchor="end" style="fill:rgb(44, 44, 42);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:serif;font-size:22px;font-weight:400;text-anchor:end;dominant-baseline:auto">♣</text>
+
+  <!-- Large center spade -->
+  <text x="340" y="168" font-size="54" fill="#3C3489" font-family="serif" text-anchor="middle" style="fill:rgb(60, 52, 137);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:serif;font-size:54px;font-weight:400;text-anchor:middle;dominant-baseline:auto">♠</text>
+
+  <!-- Diamond bottom-left -->
+  <text x="285" y="234" font-size="22" fill="#D85A30" font-family="serif" style="fill:rgb(216, 90, 48);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:serif;font-size:22px;font-weight:400;text-anchor:start;dominant-baseline:auto">♦</text>
+  <!-- Heart bottom-right (inverted feel) -->
+  <text x="380" y="234" font-size="22" fill="#E24B4A" font-family="serif" text-anchor="end" style="fill:rgb(226, 75, 74);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:serif;font-size:22px;font-weight:400;text-anchor:end;dominant-baseline:auto">♥</text>
+
+  <!-- Open source indicator — small server/network dots on card -->
+  <circle cx="340" cy="205" r="4" fill="#534AB7" opacity="0.5" style="fill:rgb(83, 74, 183);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="328" cy="213" r="3" fill="#534AB7" opacity="0.4" style="fill:rgb(83, 74, 183);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <circle cx="352" cy="213" r="3" fill="#534AB7" opacity="0.4" style="fill:rgb(83, 74, 183);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="340" y1="209" x2="328" y2="213" stroke="#534AB7" stroke-width="1" opacity="0.4" style="fill:rgb(0, 0, 0);stroke:rgb(83, 74, 183);color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="340" y1="209" x2="352" y2="213" stroke="#534AB7" stroke-width="1" opacity="0.4" style="fill:rgb(0, 0, 0);stroke:rgb(83, 74, 183);color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- App name wordmark -->
+  <text x="340" y="298" font-family="var(--font-sans)" font-size="36" font-weight="500" fill="#3C3489" text-anchor="middle" letter-spacing="1" style="fill:rgb(60, 52, 137);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Anthropic Sans, sans-serif;font-size:36px;font-weight:500;text-anchor:middle;dominant-baseline:auto">Open</text>
+  <text x="340" y="342" font-family="var(--font-sans)" font-size="36" font-weight="500" fill="#534AB7" text-anchor="middle" letter-spacing="3" style="fill:rgb(83, 74, 183);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Anthropic Sans, sans-serif;font-size:36px;font-weight:500;text-anchor:middle;dominant-baseline:auto">Rommé</text>
+
+  <!-- Tagline -->
+  <text x="340" y="375" font-family="var(--font-sans)" font-size="13" font-weight="400" fill="#888780" text-anchor="middle" letter-spacing="1" style="fill:rgb(136, 135, 128);stroke:none;color:rgb(0, 0, 0);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Anthropic Sans, sans-serif;font-size:13px;font-weight:400;text-anchor:middle;dominant-baseline:auto">self-hosted · open source</text>
+</svg>

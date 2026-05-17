@@ -10,14 +10,14 @@ Open Romme ist eine quelloffene Android-App für das klassische Kartenspiel Romm
 
 Die App ist ein reiner Client. Für den Betrieb ist ein laufender **romme-server** erforderlich, den du selbst hosten musst:
 
-- **romme-server:** [https://github.com/StefanMacher/romme-server](https://github.com/StefanMacher/romme-server)
+- **romme-server:** [https://github.com/SteMaker/romme-server](https://github.com/SteMaker/romme-server)
 - Der Server stellt die Spiellogik, die Raumverwaltung und die Echtzeit-Kommunikation über Socket.IO bereit.
 
-Ohne einen eigenen Server kann die App keine Verbindung herstellen.
+Ohne einen eigenen Server kann die App keine Verbindung herstellen und ist funktionslos.
 
 ### Anmeldung
 
-Die Authentifizierung erfolgt über einen **Nextcloud-Account** (Benutzername + App-Passwort). Du benötigst daher zusätzlich eine Nextcloud-Instanz, die mit dem romme-server verbunden ist.
+Die Authentifizierung erfolgt über einen **Nextcloud-Account** (Benutzername + App-Passwort). Du benötigst daher zusätzlich eine Nextcloud-Instanz, die mit dem romme-server verbunden ist. Das wird später vielleicht noch geändert.
 
 ### Einrichtung
 
@@ -52,7 +52,7 @@ Open Romme erhebt, speichert und überträgt **keine personenbezogenen Daten** a
 - Es werden keine Daten an Werbetreibende oder Analysedienste weitergegeben.
 - Der Entwickler hat keinen Zugriff auf deine Verbindungsdaten oder Spielinhalte.
 
-Für Fragen zum Datenschutz: **maker.stefan@googlemail.com**
+Für Fragen zum Datenschutz: **app.stemaker@gmail.com**
 
 ---
 

@@ -1,4 +1,4 @@
-package com.romme
+package com.stemaker.openromme
 
 import android.app.Application
 

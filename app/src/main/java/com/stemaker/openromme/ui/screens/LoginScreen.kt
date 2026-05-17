@@ -1,4 +1,4 @@
-package com.romme.ui.screens
+package com.stemaker.openromme.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -15,9 +15,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.romme.BuildConfig
-import com.romme.network.ConnectionState
-import com.romme.ui.GameViewModel
+import com.stemaker.openromme.BuildConfig
+import com.stemaker.openromme.network.ConnectionState
+import com.stemaker.openromme.ui.GameViewModel
 
 @Composable
 fun LoginScreen(

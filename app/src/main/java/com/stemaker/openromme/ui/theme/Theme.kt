@@ -1,4 +1,4 @@
-package com.romme.ui.theme
+package com.stemaker.openromme.ui.theme
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable

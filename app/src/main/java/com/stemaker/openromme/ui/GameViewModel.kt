@@ -1,14 +1,14 @@
-package com.romme.ui
+package com.stemaker.openromme.ui
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.romme.auth.SettingsStore
-import com.romme.auth.TokenStore
-import com.romme.game.*
-import com.romme.network.ConnectionState
-import com.romme.network.GameSocket
+import com.stemaker.openromme.auth.SettingsStore
+import com.stemaker.openromme.auth.TokenStore
+import com.stemaker.openromme.game.*
+import com.stemaker.openromme.network.ConnectionState
+import com.stemaker.openromme.network.GameSocket
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn

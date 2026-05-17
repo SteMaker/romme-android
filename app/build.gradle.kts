@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.romme"
+    namespace = "com.stemaker.openromme"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.romme"
+        applicationId = "com.stemaker.openromme"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -17,12 +17,12 @@ android {
 
         buildConfigField("String", "SERVER_URL", "\"https://example.com\"")
         buildConfigField("String", "SOCKET_PATH", "\"/romme/socket.io\"")
-        buildConfigField("String", "NEXTCLOUD_URL", "\"https://example.com\"")
+        buildConfigField("String", "NEXTCLOUD_URL", "\"https://nextcloud.example.com\"")
     }
 
     buildTypes {
         debug {
-            buildConfigField("String", "SERVER_URL", "\"http://example.com:3001\"")
+            buildConfigField("String", "SERVER_URL", "\"https://example.com\"")
         }
     }
 

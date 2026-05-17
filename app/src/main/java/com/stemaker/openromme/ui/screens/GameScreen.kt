@@ -1,4 +1,4 @@
-package com.romme.ui.screens
+package com.stemaker.openromme.ui.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -24,11 +24,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.zIndex
-import com.romme.game.Card
-import com.romme.game.GameState
-import com.romme.game.Meld
-import com.romme.game.TurnSummary
-import com.romme.ui.GameViewModel
+import com.stemaker.openromme.game.Card
+import com.stemaker.openromme.game.GameState
+import com.stemaker.openromme.game.Meld
+import com.stemaker.openromme.game.TurnSummary
+import com.stemaker.openromme.ui.GameViewModel
 import androidx.activity.compose.BackHandler
 import androidx.compose.ui.input.pointer.positionChange
 import kotlin.math.roundToInt

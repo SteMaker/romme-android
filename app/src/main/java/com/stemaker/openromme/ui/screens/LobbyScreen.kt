@@ -1,4 +1,4 @@
-package com.romme.ui.screens
+package com.stemaker.openromme.ui.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
@@ -14,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.romme.game.RoomInfo
-import com.romme.ui.GameViewModel
+import com.stemaker.openromme.game.RoomInfo
+import com.stemaker.openromme.ui.GameViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

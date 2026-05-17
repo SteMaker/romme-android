@@ -1,4 +1,4 @@
-package com.romme.game
+package com.stemaker.openromme.game
 
 /**
  * Datenklassen die den Spielzustand auf dem Client abbilden.

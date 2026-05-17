@@ -1,4 +1,4 @@
-package com.romme.auth
+package com.stemaker.openromme.auth
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,4 +1,4 @@
-package com.romme.ui
+package com.stemaker.openromme.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.romme.ui.screens.GameScreen
-import com.romme.ui.screens.LobbyScreen
-import com.romme.ui.screens.LoginScreen
-import com.romme.ui.theme.RommeTheme
+import com.stemaker.openromme.ui.screens.GameScreen
+import com.stemaker.openromme.ui.screens.LobbyScreen
+import com.stemaker.openromme.ui.screens.LoginScreen
+import com.stemaker.openromme.ui.theme.RommeTheme
 
 class MainActivity : ComponentActivity() {
     private val viewModel: GameViewModel by viewModels()

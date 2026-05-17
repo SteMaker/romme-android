@@ -1,3 +1,9 @@
+# Rommé – Spielregeln / Game Rules
+
+---
+
+## Deutsch
+
 # Rommé – Spielregeln (implementiert)
 
 Dieses Dokument beschreibt alle Spielregeln so, wie sie im Code des Servers (`rommeGame.js`, `meldValidator.js`, `deck.js`) und der Android-App implementiert sind, einschließlich aller Sonderfälle.
@@ -229,3 +235,239 @@ Meldungen werden mit einer fortlaufenden ID (0, 1, 2, …) nummeriert. Sie werde
 
 ### Sichtbarkeit der Handkarten
 Jeder Spieler sieht nur die eigenen Handkarten vollständig. Von Mitspielern ist nur die **Anzahl der Handkarten** sichtbar sowie ob sie bereits ihre Erstauslage gemacht haben.
+
+---
+
+## English
+
+# Rommé – Game Rules (as implemented)
+
+This document describes all game rules as implemented in the server code (`rommeGame.js`, `meldValidator.js`, `deck.js`) and the Android app, including all edge cases.
+
+---
+
+## 1. Cards & Deck
+
+| Property | Value |
+|---|---|
+| Decks | 2 × 52 cards |
+| Jokers | 6 (3 per deck) |
+| Total | **110 cards** |
+| Suits | Clubs ♣, Spades ♠, Hearts ♥, Diamonds ♦ |
+| Ranks | 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace |
+
+### Card Values (Points)
+
+| Card | Points |
+|---|---|
+| 2–9 | Face value (2–9) |
+| 10, Jack, Queen, King | 10 |
+| Ace | 11 |
+| Joker | 20 |
+
+> **Ace in wrap-around sequences:** In a sequence that includes the Ace together with low cards (2–10) *without* a King (e.g. A-2-3), the Ace counts only **1 point** when evaluating the initial lay-down (40-point minimum). At end-of-round scoring (hand cards), the Ace always counts 11 points.
+
+---
+
+## 2. Setup
+
+- **Number of players:** 2–6.
+- Each player receives **13 cards**.
+- The first card of the remaining deck is placed face-up on the **discard pile**.
+- All remaining cards form the face-down **draw pile**.
+- The first player in the room (the host) goes first.
+
+---
+
+## 3. Turn Structure
+
+Each turn consists of three phases in this order:
+
+### Phase 1 – Draw (`draw`)
+The player **must** draw exactly one card:
+- from the **draw pile** (face-down), or
+- from the **top of the discard pile** (face-up).
+
+### Phase 2 – Play (`play`)
+The player **may** perform any number of the following actions (in any order and any quantity):
+- Lay down a new **meld** (set or sequence).
+- **Append** a card to an existing meld.
+- **Replace** a joker.
+
+All three actions are optional. The phase ends with the discard.
+
+### Phase 3 – Discard
+The player **must** place exactly one card on the discard pile to end their turn.
+
+> **Exception:** If the player has no cards left in hand after laying down or appending, the round ends immediately — no discard is required.
+
+---
+
+## 4. Melds
+
+### 4.1 Set (`satz`)
+
+- Exactly **3 or 4 cards**.
+- All cards have the **same rank**.
+- All cards have **different suits**.
+- Jokers may substitute for a missing suit.
+
+**Valid examples:**
+- ♣8 ♠8 ♥8
+- ♣K ♠K ♥K ♦K
+- ♣7 ♠7 JOKER (Joker stands for ♥7 or ♦7)
+
+**Invalid:**
+- ♣8 ♠8 ♠8 (two spades – same suit)
+- ♣8 ♠8 (only 2 cards)
+- ♣8 ♠8 ♥8 ♦8 JOKER (5 cards – more than 4)
+
+### 4.2 Sequence (`folge`)
+
+- At least **3 cards**.
+- All cards the **same suit**.
+- **Consecutive ranks** (no gaps except those filled by a joker).
+- A joker fills exactly one gap.
+- **No duplicate ranks** within a sequence.
+- No explicit maximum — theoretically up to 13+ cards possible.
+
+**Wrap-around sequences:**
+The Ace can be both high (after King) and low (before 2):
+- `K-A-2` is valid (Ace between King and 2).
+- `A-2-3` is valid (Ace before 2).
+- `Q-K-A` is valid (Ace after King).
+
+**Valid examples:**
+- ♥5 ♥6 ♥7
+- ♥5 JOKER ♥7 (Joker = ♥6)
+- JOKER ♥6 ♥7 (Joker = ♥5 as edge joker)
+- ♥5 ♥6 JOKER (Joker = ♥7 as edge joker)
+
+**Invalid:**
+- ♥5 ♥6 ♠7 (different suits)
+- ♥5 JOKER ♥8 (Joker would have to fill two gaps: ♥6 and ♥7)
+- ♥5 ♥6 ♥6 (duplicate rank)
+
+### 4.3 Card Order When Laying Down a Sequence
+
+When laying down a sequence, the server validates the **card order chosen by the player**:
+- Normal cards must be in strictly ascending order.
+- A joker must be placed **exactly** at the gap position between two normal cards.
+- Edge jokers (at the start or end) are allowed.
+
+**Examples:**
+- `[♥3, JOKER, ♥5]` → valid (Joker at the gap between 3 and 5).
+- `[JOKER, ♥3, ♥5]` → **invalid** (Joker is left of 3, but the gap is between 3 and 5).
+- `[JOKER, ♥4, ♥5]` → valid (Joker as edge joker for ♥3).
+
+---
+
+## 5. Initial Lay-Down
+
+- Each player must complete an **initial lay-down** before they can append cards to existing melds or replace jokers.
+- The first meld a player lays down must be worth at least **40 points**.
+- Points are calculated using card values (including 20 points per joker; observe the Ace wrap-around rule).
+- Once the initial lay-down is complete, the 40-point threshold no longer applies — further melds in the same turn have no minimum point requirement.
+
+---
+
+## 6. Appending to a Meld (`appendToMeld`)
+
+- Only possible **after the player's own initial lay-down**.
+- Cards may be appended to **any meld** on the table, including melds laid down by other players.
+- The appended card must keep the meld valid.
+- **Joker as edge card:** A joker from hand may be appended to a meld if the resulting meld remains valid (the joker is positioned as an edge joker).
+
+### Redundant Joker
+
+If an appended card takes the position previously held by a joker in the meld (i.e. the joker is now redundant because the meld is valid without it), the joker is **automatically removed from the meld and added to the player's hand**.
+
+**Example:**
+- Meld on the table: `[♥5, JOKER, ♥7]` (Joker = ♥6)
+- Player appends ♥6.
+- Result: meld becomes `[♥5, ♥6, ♥7]`, the **joker goes to the player's hand**.
+
+---
+
+## 7. Replacing a Joker (`replaceJoker`)
+
+- Only possible **after the player's own initial lay-down**.
+- The player taps a joker in any meld.
+- The server automatically finds the **first valid card** in the player's hand (in hand order) that can replace the joker.
+- That card is placed in the meld at the joker's position.
+- The joker goes to the **player's hand**.
+- If no matching card exists, the action fails.
+
+> **Note:** The player **cannot choose** which hand card is used — the server picks the first valid one.
+
+---
+
+## 8. Winning
+
+The round ends immediately when a player has **no cards left in hand**. This can happen by:
+
+1. Laying down a meld with the last cards.
+2. Appending the last card to an existing meld.
+3. Discarding the last card onto the discard pile.
+
+> Replacing a joker alone cannot win the round (one card leaves the hand, one joker enters — net change: zero).
+
+---
+
+## 9. Scoring
+
+| Player | Points |
+|---|---|
+| Winner | 0 |
+| Losers | Negative sum of remaining hand card values |
+
+Hand card values use standard values (Ace = 11, regardless of game context).
+
+---
+
+## 10. Lobby & Rooms
+
+- **Minimum** to start a game: 2 players.
+- **Maximum** per room: 6 players.
+- Only the **room creator (host)** can start the game.
+- If the host leaves the room before the game starts, the next player automatically becomes host.
+- **After the game ends**, the room is automatically deleted and removed from the room list.
+- Empty rooms are automatically deleted.
+- If a player disconnects during the game, they are removed from the room; the game object on the server remains (the connection to other players continues).
+
+---
+
+## 11. Edge Cases & Implementation Details
+
+### Drawing from the Discard Pile in the PLAY Phase
+Drawing from the discard pile is not restricted to the DRAW phase — it is also possible during the **PLAY phase**. This means a player could theoretically draw from the draw pile first (→ PLAY phase), and then draw again from the discard pile in the same turn. The game does not enforce a one-card-per-turn limit.
+
+### DISCARD Phase Exists in Code but Is Never Set
+The code defines three phases: `draw`, `play`, `discard`. However, no game action ever sets the `discard` phase — `_nextTurn()` always sets `draw`, and drawing always sets `play`. Discarding is possible from the `play` phase (not from `discard`). The `discard` phase is dead code.
+
+### Two Identical Cards (2 Decks)
+Since two full decks are used, there are **two copies** of every card (distinguished by an internal deck ID). Both copies can be on the table at the same time — but **not in the same meld** (set: same suit forbidden; sequence: same rank forbidden).
+
+### No Multi-Round Support
+The `round` field exists in the code (initialised to `1`) but is never incremented. The current implementation supports only **one round** per game.
+
+### Joker Order When Laying Down
+The card order of a meld is **stored exactly as chosen by the player** when laying down (no automatic sorting during `layDownMeld`). The server only validates that the chosen order is rule-compliant.
+
+### Automatic Sorting When Appending and Replacing Jokers
+After `appendToMeld` and `replaceJoker`, the meld is **automatically sorted** (sequence: ascending by rank; set: ascending by suit). Jokers are placed in the correct gap positions.
+
+### Maximum Set Size: 4 Cards
+A set is limited to **4 cards** (one per suit). With a joker, the maximum is still 4 cards total — a joker cannot be appended to a complete 4-card set.
+
+### Empty Draw Pile
+When the draw pile is empty, the discard pile (except for the top card) is **reshuffled** and becomes the new draw pile. If the discard pile is also too small (≤ 1 card), no card can be drawn and the action fails.
+
+### Joker in the Initial Lay-Down
+A joker counts **20 points** toward the initial lay-down evaluation (40-point minimum). For example, a meld of ♥5, JOKER, ♥7 has a value of 5 + 20 + 7 = 32 points (< 40 → insufficient for the initial lay-down).
+
+### Meld Order on the Table
+Melds are numbered with sequential IDs (0, 1, 2, …). They are never removed or reordered. All players see all melds from all players.
+
+### Hand Card Visibility
+Each player sees only their own hand cards in full. From other players, only the **number of hand cards** is visible, plus whether they have already completed their initial lay-down.
